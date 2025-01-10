@@ -1,0 +1,25 @@
+The following CSS code snippet demonstrates an uncommon error related to the specificity of CSS selectors and the cascading order in which styles are applied:
+
+```css
+div {
+  color: blue;
+}
+
+.special-div {
+  color: red;
+}
+
+#my-div {
+  color: green;
+}
+
+#my-div.special-div {
+  color: purple; /* This is the unexpected behavior */
+}
+
+<div id="my-div" class="special-div"></div>
+```
+
+The unexpected behavior stems from the selector `#my-div.special-div` having higher specificity than the selectors `#my-div` and `.special-div`.  This is because the ID selector (`#my-div`) has the highest specificity, and the class selector (`.special-div`) is combined, resulting in a specificity that overrides the individual `#my-div` and `.special-div` rules.  The element will end up displaying purple text instead of either green or red as one might initially assume.
+
+This issue can be difficult to debug as it's not an immediate syntax error; the code is valid but produces an unexpected outcome.  The problem lies in misunderstanding how CSS specificity works when combining selectors with different levels of specificity.
